@@ -10,4 +10,9 @@ class Company extends Model
     {
     	return $this->belongsTo('Company');
     }
+
+    public function users()
+    {
+    	return $this->hasMany('User');
+    }
 }
