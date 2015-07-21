@@ -2,3 +2,5 @@
 /node_modules
 Homestead.yaml
 .env
+bower_components/
+.vagrant/
