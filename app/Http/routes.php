@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// users
+Route::resource('users', 'UsersController');
+
+// workspaces
+Route::resource('workspaces', 'WorkspacesController');
+
+// companies
+Route::resource('companies', 'CompaniesController');

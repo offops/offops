@@ -1,9 +1,48 @@
 /**
+ * Fonts
  *
- * Apply Here your Custom CSS
- *
-*/
+ * Import custom fonts
+ */
+@import url(http://fonts.googleapis.com/css?family=Oswald);
+@import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed);
 
-body {
-	
+
+/**
+ * General
+ */
+h1,h2,h3,h4,h5,h6 {
+	font-family: "Oswald", sans-serif;
+}
+h4,h5,h6 {
+	font-family: "Roboto Condensed", sans-serif;
+}
+
+
+/**
+ * Sidebar
+ */
+.page-container .sidebar-menu .logo-env {
+	padding: 10px 10px 4px 4px;
+}
+.page-container .sidebar-menu {
+	width: 220px;
+}
+
+
+/**
+ * Top Navigation
+ */
+#topnav {
+	margin-top: -15px;
+	border-bottom: 1px solid #eeeef0;
+}
+#search {
+	width: 20em;
+}
+#search:focus {
+	width: 30em;
+}
+#logout-button {
+	margin-top: -2em;
 }
