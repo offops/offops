@@ -8,11 +8,11 @@
 	<meta name="description" content="Neon Admin Panel" />
 	<meta name="author" content="" />
 
-	<title>Neon | Forms</title>
+	<title>{{ $title or workspace('name') }}</title>
 
 	<link rel="stylesheet" href="/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
 	<link rel="stylesheet" href="/assets/css/font-icons/entypo/css/entypo.css">
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">
+	<link rel="stylesheet" href="/assets/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/assets/css/bootstrap.css">
 	<link rel="stylesheet" href="/assets/css/neon-core.css">
 	<link rel="stylesheet" href="/assets/css/neon-theme.css">
@@ -46,14 +46,12 @@
 
 		<div class="main-content">
 			
-			<div class="row">
+			<div id="topnav" class="row">
 				@include('layouts.topnav')
 			</div>
 			
-			<hr />
-			
 			<ol class="breadcrumb bc-3" >
-				@yield('breadcrumbs', '<li><a href="/"><i class="fa-home"></i>Home</a></li>')
+				@yield('breadcrumbs', '<li><a href="/"><i class="fa fa-home"></i>Home</a></li>')
 			</ol>
 
 			@yield('content')
