@@ -27,4 +27,13 @@ class Company extends Model
     {
     	return $this->hasMany('App\User');
     }
+
+    /**
+     * This company has many contracts
+     * @return Relation
+     */
+    public function contracts()
+    {
+        return $this->hasMany('App\Company');
+    }
 }

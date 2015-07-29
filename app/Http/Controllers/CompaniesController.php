@@ -19,7 +19,7 @@ class CompaniesController extends Controller
     {
         $paginator = \App\Company::paginate();
         $companies = $paginator->getCollection();
-        return view('companies.index', compact('companies'));
+        return view('companies.index', compact('companies', 'paginator'));
     }
 
     /**
