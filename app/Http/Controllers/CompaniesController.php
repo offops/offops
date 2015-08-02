@@ -38,7 +38,7 @@ class CompaniesController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(\App\Http\Requests\RegisterCompanyFormRequest $request)
     {
         $workspace_id = $request->input('workspace_id');
         $company = $request->input('company');
@@ -50,7 +50,9 @@ class CompaniesController extends Controller
             $user
         ));
 
-        return $result;
+        return $request->ajax() ?
+            response()->json($result, 201) :
+            redirect('companies');
     }
 
     /**
@@ -61,7 +63,11 @@ class CompaniesController extends Controller
      */
     public function show($id)
     {
-        //
+        $company = \App\Company::findOrFail($id);
+
+        return $request->ajax() ?
+            response()->json($result, 200) :
+            view('companies/show', [$company->id])->with('company', $company);
     }
 
     /**
