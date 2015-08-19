@@ -3,12 +3,14 @@
 namespace App\Commands;
 
 use App\Commands\Command;
-use Illuminate\Contracts\Bus\SelfHandling;
 use App\Company;
+use App\Http\Requests\RegisterCompanyFormRequest;
 use App\User;
 use App\Workspace;
+use Illuminate\Contracts\Bus\SelfHandling;
 
-class RegisterNewCompany extends Command implements SelfHandling
+
+class RegisterCompanyCommand extends Command implements SelfHandling
 {
     /**
      * Register a new company with a primary user
@@ -22,11 +24,19 @@ class RegisterNewCompany extends Command implements SelfHandling
      * @param \App\User primary user
      * @return void
      */
-    public function __construct($workspace_id, $company_name, $user)
+    public function __construct(RegisterCompanyFormRequest $request)
     {
-        $this->user = $user + ['password' => str_random(16)];
-        $this->workspace_id = $workspace_id;
-        $this->company_name = $company_name;
+        $this->workspace_id = $request->input('company_workspace_id');
+
+        $this->company = [
+            'name' => $request->input('company_name'),
+            'workspace_id' => $request->input('company_workspace_id'),
+        ];
+
+        $this->user = [
+            'name' => $request->input('user_name'),
+            'email' => $request->input('user_email'),
+        ];
     }
 
     /**
@@ -36,7 +46,10 @@ class RegisterNewCompany extends Command implements SelfHandling
      */
     public function handle()
     {
-        $company = null;
+        \Log::info([
+            'company' => $this->company,
+            'user' => $this->user
+        ]);
 
         // db transaction
         \DB::transaction(function() use (&$company)
@@ -44,14 +57,16 @@ class RegisterNewCompany extends Command implements SelfHandling
             // fetch workspace
             $workspace = Workspace::findOrFail($this->workspace_id);
 
-            // prep the user
+            // assoc existing user to this company
             $user_email = $this->user['email'];
             $user = User::findByEmail($user_email) ?: new User;
             $user->fill($this->user);
+            $user->password = str_random(16);
 
-            // prep the company
+            // if the user/company exists, 
+            // update the values instead of creating a new one
             $company = $user->company ?: new Company;
-            $company->name = $this->company_name;
+            $company->fill($this->company);
 
             // set fks
             $company->workspace_id = $this->workspace_id;
@@ -68,8 +83,9 @@ class RegisterNewCompany extends Command implements SelfHandling
                 throw new Exception('Could not save user');
             }
 
+            return $company;
         });
 
-        return $company;
+        return null;
     }
 }
