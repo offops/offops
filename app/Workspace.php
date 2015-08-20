@@ -14,4 +14,14 @@ class Workspace extends Model
 	{
 		return $this->hasMany('App\Company');
 	}
+
+	public function textblock($key = '')
+	{
+		return $this->textblocks()->where('key', $key)->pluck('text');
+	}
+
+	public function textblocks()
+	{
+		return $this->hasMany('App\Textblock');
+	}
 }
