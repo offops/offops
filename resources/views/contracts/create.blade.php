@@ -18,7 +18,7 @@
 
 		<div class="form-group">
 			{!! Form::label('terms_and_conditions', 'Terms & Conditions') !!}
-			{!! Form::textarea('terms_and_conditions', null, ['class' => 'form-control', 'placeholder' => 'Terms & Conditions']) !!}
+			{!! Form::textarea('terms_and_conditions', workspace()->textblock('terms_and_conditions'), ['class' => 'form-control', 'placeholder' => 'Terms & Conditions']) !!}
 			<small class="text-danger">{{ $errors->first('terms_and_conditions') }}</small>
 		</div>
 
