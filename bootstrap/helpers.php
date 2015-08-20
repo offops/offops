@@ -2,9 +2,9 @@
 
 if (!function_exists('workspace'))
 {
-	function workspace($key, $id = 1)
+	function workspace($key = null, $id = 1)
 	{
 		$workspace = \App\Workspace::find($id);
-		return $workspace ? $workspace->$key : '';
+		return ($workspace && $key) ? $workspace->$key : $workspace;
 	}
 }
