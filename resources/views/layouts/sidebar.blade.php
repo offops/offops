@@ -3,8 +3,8 @@
 
 	<!-- logo -->
 	<div class="logo">
-		<a href="index.html">
-			<img src="/assets/images/logo@2x.png" width="170" alt="{{ workspace('name') }}">
+		<a href="/">
+			{!! HTML::image('/assets/images/logo@2x.png', null, ['class' => 'logo', 'width' => 150]) !!}
 		</a>
 	</div>
 

@@ -51,21 +51,26 @@
 			</div>
 			
 			<ol class="breadcrumb bc-3" >
-				@yield('breadcrumbs', '<li><a href="/"><i class="fa fa-home"></i>Home</a></li>')
+				<li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+				@yield('breadcrumbs')
 			</ol>
 
 			@yield('content')
 
 			<!-- Footer -->
 			<footer class="main hide">
-				
 				&copy; 2014 <strong>Neon</strong> Admin Theme by <a href="http://laborator.co" target="_blank">Laborator</a>
-				
 			</footer>
 		</div>
 
 	</div>
 
+	<!-- Bottom Styles (common) -->
+	<link rel="stylesheet" href="/assets/js/select2/select2-bootstrap.css">
+	<link rel="stylesheet" href="/assets/js/select2/select2.css">
+
+	<!-- Imported Styles on this page -->
+	@yield('styles')
 
 	<!-- Bottom scripts (common) -->
 	<script src="/assets/js/gsap/main-gsap.js"></script>
@@ -74,19 +79,13 @@
 	<script src="/assets/js/joinable.js"></script>
 	<script src="/assets/js/resizeable.js"></script>
 	<script src="/assets/js/neon-api.js"></script>
-
+	<script src="/assets/js/select2/select2.min.js"></script>
 
 	<!-- Imported scripts on this page -->
-	<script src="/assets/js/bootstrap-switch.min.js"></script>
-	<script src="/assets/js/neon-chat.js"></script>
-
+	@yield('scripts')
 
 	<!-- JavaScripts initializations and stuff -->
 	<script src="/assets/js/neon-custom.js"></script>
-
-
-	<!-- Demo Settings -->
-	<script src="/assets/js/neon-demo.js"></script>
 
 	@yield('tail')
 

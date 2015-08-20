@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
+    /**
+     * Mass-assignable attributes
+     * @var array
+     */
     protected $fillable = [
         'name'
     ];
@@ -34,6 +38,6 @@ class Company extends Model
      */
     public function contracts()
     {
-        return $this->hasMany('App\Company');
+        return $this->hasMany('App\Contract');
     }
 }

@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Company;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use \App\Commands\RegisterNewCompany;
+use \App\Commands\RegisterCompanyCommand;
+use \App\Http\Requests\RegisterCompanyFormRequest;
 
 class CompaniesController extends Controller
 {
@@ -15,11 +16,14 @@ class CompaniesController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $paginator = \App\Company::paginate();
+        $paginator = Company::paginate();
         $companies = $paginator->getCollection();
-        return view('companies.index', compact('companies', 'paginator'));
+
+        return $request->ajax() ?
+            response()->json($companies, 200) : // ajax
+            view('companies.index', compact('paginator','companies')); // html 
     }
 
     /**
@@ -35,20 +39,12 @@ class CompaniesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param  RegisterCompanyFormRequest  $request
      * @return Response
      */
-    public function store(\App\Http\Requests\RegisterCompanyFormRequest $request)
+    public function store(RegisterCompanyFormRequest $request)
     {
-        $workspace_id = $request->input('workspace_id');
-        $company = $request->input('company');
-        $user = $request->input('user');
-
-        $result = $this->dispatch(new RegisterNewCompany(
-            $workspace_id,
-            $company['name'],
-            $user
-        ));
+        $result = $this->dispatch(new RegisterCompanyCommand($request));
 
         return $request->ajax() ?
             response()->json($result, 201) :
@@ -63,11 +59,9 @@ class CompaniesController extends Controller
      */
     public function show($id)
     {
-        $company = \App\Company::findOrFail($id);
+        $company = Company::findOrFail($id);
 
-        return $request->ajax() ?
-            response()->json($result, 200) :
-            view('companies/show', [$company->id])->with('company', $company);
+        return view('companies/show', [$company->id])->with('company', $company);
     }
 
     /**
