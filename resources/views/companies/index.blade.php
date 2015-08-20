@@ -25,4 +25,7 @@
 		</table>
 	</div>
 </div>
+<div class="row text-center">
+	{!! $paginator->render() !!}
+</div>
 @stop

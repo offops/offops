@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
+    /**
+     * Mass-assignable attributes
+     * @var array
+     */
     protected $fillable = [
         'name'
     ];
@@ -26,5 +30,14 @@ class Company extends Model
     public function users()
     {
     	return $this->hasMany('App\User');
+    }
+
+    /**
+     * This company has many contracts
+     * @return Relation
+     */
+    public function contracts()
+    {
+        return $this->hasMany('App\Contract');
     }
 }

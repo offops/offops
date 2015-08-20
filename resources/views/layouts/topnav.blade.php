@@ -440,7 +440,7 @@
 		--}}
 
 		<li>
-			{!! Form::open() !!}
+{{-- 			{!! Form::open() !!}
 			<div id="search" class="input-group">
 				<input type="text" class="form-control" placeholder="Search">
 				<span class="input-group-btn">
@@ -450,7 +450,7 @@
 				</span>
 			</div>
 			{!! Form::close() !!}
-		</li>
+ --}}		</li>
 
 		<li>
 			<a id="logout-button" href="extra-login.html" class="btn btn-default">

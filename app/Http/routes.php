@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () { return view('welcome'); });
+
+// contracts
+Route::resource('contracts', 'ContractsController');
 
 // users
 Route::resource('users', 'UsersController');
@@ -23,3 +24,6 @@ Route::resource('workspaces', 'WorkspacesController');
 
 // companies
 Route::resource('companies', 'CompaniesController');
+
+// companies.users
+Route::resource('companies.users', 'CompaniesUsersController');
