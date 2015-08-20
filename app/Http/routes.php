@@ -25,5 +25,8 @@ Route::resource('workspaces', 'WorkspacesController');
 // companies
 Route::resource('companies', 'CompaniesController');
 
+// companies.contracts
+Route::resource('companies.contracts', 'CompaniesContractsController');
+
 // companies.users
 Route::resource('companies.users', 'CompaniesUsersController');
